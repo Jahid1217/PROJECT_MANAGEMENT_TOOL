@@ -1,0 +1,5 @@
+{
+  "name": "Kit Project Tool",
+  "description": "Enterprise-grade project management system with Kanban boards, meeting calendar, daily activity logs, time tracking, and RBAC.",
+  "requestFramePermissions": []
+}
