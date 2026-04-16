@@ -3,6 +3,7 @@ package com.kit.controller;
 import com.kit.dto.AuthDto;
 import com.kit.entity.User;
 import com.kit.repository.UserRepository;
+import com.kit.service.ApiMapper;
 import com.kit.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ public class AuthController {
 
     private final AuthService authService;
     private final UserRepository userRepository;
+    private final ApiMapper apiMapper;
 
     @PostMapping("/register")
     public ResponseEntity<AuthDto.AuthResponse> register(@RequestBody AuthDto.RegisterRequest request) {
@@ -31,16 +33,7 @@ public class AuthController {
     public ResponseEntity<AuthDto.UserDto> getMe(Authentication authentication) {
         String email = authentication.getName();
         User user = userRepository.findByEmail(email).orElseThrow();
-        
-        AuthDto.UserDto userDto = AuthDto.UserDto.builder()
-                .id(user.getId())
-                .email(user.getEmail())
-                .role(user.getRole())
-                .fullName(user.getFullName())
-                .profilePicture(user.getProfilePicture())
-                .bio(user.getBio())
-                .build();
-                
-        return ResponseEntity.ok(userDto);
+
+        return ResponseEntity.ok(apiMapper.toAuthUserDto(user));
     }
 }

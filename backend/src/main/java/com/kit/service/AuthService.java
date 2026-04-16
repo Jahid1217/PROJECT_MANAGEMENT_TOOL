@@ -2,6 +2,7 @@ package com.kit.service;
 
 import com.kit.dto.AuthDto;
 import com.kit.entity.User;
+import com.kit.entity.enums.Role;
 import com.kit.repository.UserRepository;
 import com.kit.security.JwtService;
 import com.kit.security.UserDetailsImpl;
@@ -29,7 +30,7 @@ public class AuthService {
                 .email(request.getEmail())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .fullName(request.getFullName())
-                .role(request.getRole())
+                .role(request.getRole() != null ? request.getRole() : Role.DEVELOPER)
                 .build();
 
         userRepository.save(user);

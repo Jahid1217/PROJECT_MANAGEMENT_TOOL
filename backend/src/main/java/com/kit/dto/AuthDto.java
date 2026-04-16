@@ -1,6 +1,7 @@
 package com.kit.dto;
 
 import com.kit.entity.enums.Role;
+import com.fasterxml.jackson.annotation.JsonAlias;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +16,7 @@ public class AuthDto {
     public static class RegisterRequest {
         private String email;
         private String password;
+        @JsonAlias("full_name")
         private String fullName;
         private Role role;
     }

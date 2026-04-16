@@ -46,7 +46,7 @@ services:
   # React Frontend
   frontend:
     build:
-      context: .
+      context: ./frontend
       dockerfile: Dockerfile
     container_name: kit-frontend
     depends_on:
